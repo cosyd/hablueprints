@@ -7,9 +7,10 @@ blueprint:
       name: Motion sensors
       description: The sensors that will trigger the notification.
       selector:
-        entity:
-          domain: binary_sensor
-          device_class: motion
+        target:
+          entity:
+            domain: binary_sensor
+            device_class: motion
     notify_device:
       name: Device
       description: The mobile device to notify.
@@ -20,8 +21,8 @@ blueprint:
 trigger:
   platform: state
   entity_id: !input 'motion_sensors'
-  from: 'clear'
-  to: 'detected'
+  from: 'off'
+  to: 'on'
 
 action:
   service: notify.notify
