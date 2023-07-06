@@ -20,13 +20,15 @@ blueprint:
 
 trigger:
   platform: state
-  entity_id: !input 'motion_sensors'
   from: 'off'
   to: 'on'
 
 action:
-  service: notify.notify
-  data:
-    message: >
-      Motion detected by {{ trigger.to_state.name }}
-    target: !input 'notify_device'
+  - choose:
+      - conditions: "{{ trigger.entity_id in motion_sensors.entity_id }}"
+        sequence:
+          - service: notify.notify
+            data:
+              message: >
+                Motion detected by {{ trigger.to_state.name }}
+              target: !input 'notify_device'
