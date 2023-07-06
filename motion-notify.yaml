@@ -20,8 +20,8 @@ blueprint:
 trigger:
   platform: state
   entity_id: !input 'motion_sensors'
-  from: 'off'
-  to: 'on'
+  from: 'clear'
+  to: 'detected'
 
 action:
   service: notify.notify
